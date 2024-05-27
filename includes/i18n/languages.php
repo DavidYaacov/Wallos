@@ -8,6 +8,7 @@
         "el" => ["name" => "Ελληνικά", "dir" => "ltr"],
         "es" => ["name" => "Español", "dir" => "ltr"],
         "fr" => ["name" => "Français", "dir" => "ltr"],
+        "he" => ["name" => "עברית", "dir" => "rtl"],
         "it" => ["name" => "Italiano", "dir" => "ltr"],
         "jp" => ["name" => "日本語", "dir" => "ltr"],
         "ko" => ["name" => "한국어", "dir" => "ltr"],
