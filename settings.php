@@ -19,7 +19,7 @@
                         <div>
                             <div class="user-avatar">
                                 <img src="<?= $userData['avatar'] ?>" alt="avatar" class="avatar" id="avatarImg" onClick="toggleAvatarSelect()"/>
-                                <span class="edit-avatar" onClick="toggleAvatarSelect()" title="Change Avatar">
+                                <span class="edit-avatar" onClick="toggleAvatarSelect()" title="<?= translate('change_avatar', $i18n) ?>">
                                     <i class="fa-solid fa-pencil"></i>
                                 </span>
                             </div>
@@ -36,7 +36,7 @@
                                         <?php if (! str_starts_with($image, '.')) :?>
                                             <div class="avatar-container" data-src="<?=$image?>">
                                                 <img src="images/uploads/logos/avatars/<?=$image?>" alt="<?=$image?>" class="avatar-option" data-src="images/uploads/logos/avatars/<?=$image?>"/>
-                                                <div class="remove-avatar" onclick="deleteAvatar('<?=$image?>')" title="Delete avatar">
+                                                <div class="remove-avatar" onclick="deleteAvatar('<?=$image?>')" title="<?= translate('delete_avatar', $i18n) ?>">
                                                     <i class="fa-solid fa-xmark"></i>
                                                 </div>
                                             </div>
