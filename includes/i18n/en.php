@@ -113,7 +113,9 @@ $i18n = [
     'icons'           => "Icons",
     'payment_icons'   => "Payment Icons",
     // Settings page
+    'change_avatar'   => "Change Avatar",
     'upload_avatar'   => "Upload Avatar",
+    'delete_avatar'   => "Delete avatar",
     'file_type_error' => "The file type supplied is not supported.",
     'user_details'    => "User Details",
     "monthly_budget"  => "Monthly Budget",
