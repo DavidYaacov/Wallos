@@ -23,10 +23,10 @@ $i18n = [
     'login_failed' => 'Le credenziali non sono corrette',
     'registration_successful' => "L'account è stato creato con successo",
     'user_email_waiting_verification' => "L'e-mail deve essere verificata. Controlla la tua email",
-    
+
     // Password Reset Page
     'forgot_password' => "Hai dimenticato la password?",
-    'reset_password'  => "Reimposta password",
+    'reset_password' => "Reimposta password",
     'reset_sent_check_email' => "Un'email è stata inviata. Controlla la tua casella di posta",
     'password_reset_successful' => "La password è stata reimpostata con successo",
 
@@ -69,6 +69,7 @@ $i18n = [
     'empty_page' => 'Pagina vuota',
     'clear_filters' => 'Pulisci filtri',
     'no_matching_subscriptions' => 'Nessun abbonamento corrispondente',
+    "clone" => "Clona",
 
     // Add/Edit Subscription
     'add_subscription' => 'Aggiungi abbonamento',
@@ -104,7 +105,7 @@ $i18n = [
     'budget_remaining' => 'Budget rimanente',
     'amount_over_budget' => 'Importo oltre il budget',
     'monthly_savings' => 'Risparmi mensili (su abbonamenti inattivi)',
-    'yearly_savings'  => 'Risparmi annuali (su abbonamenti inattivi)',
+    'yearly_savings' => 'Risparmi annuali (su abbonamenti inattivi)',
     'split_views' => 'Visualizzazioni con grafici',
     'category_split' => 'Suddivisione per categoria',
     'household_split' => 'Suddivisione per nucleo familiare',
@@ -160,6 +161,8 @@ $i18n = [
     "discord_bot_avatar_url" => "URL dell'avatar del bot",
     "pushover" => "Pushover",
     "pushover_user_key" => "Chiave utente",
+    'host' => "Host",
+    'topic' => "Topic",
     'categories' => 'Categorie',
     'save_category' => 'Salva categoria',
     'delete_category' => 'Elimina categoria',
@@ -183,7 +186,7 @@ $i18n = [
     "theme_settings" => 'Impostazioni del tema',
     "custom_colors" => 'Colori personalizzati',
     "dark_theme" => 'Tema scuro',
-    'switch_theme' => 'Cambia tema chiaro/scuro',
+    "automatic" => "Automatico",
     'calculate_monthly_price' => 'Calcola e mostra il prezzo mensile per tutti gli abbonamenti',
     'convert_prices' => 'Converti sempre e mostra i prezzi nella mia valuta principale (più lento)',
     "hide_disabled_subscriptions" => 'Nascondi gli abbonamenti disattivati',
@@ -230,20 +233,20 @@ $i18n = [
     'failed_edit_category' => 'Impossibile modificare la categoria',
     "category_in_use" => "La categoria è attualmente in uso da almeno un abbonamento",
     "failed_remove_category" => "Impossibile rimuovere la categoria",
-    "category_saved"  => "Categoria salvata",
+    "category_saved" => "Categoria salvata",
     "category_removed" => "Categoria rimossa",
     "sort_order_saved" => "Ordine di visualizzazione salvato",
 
     // Currency
-    "currency_saved"  => "Valuta salvata con successo",
+    "currency_saved" => "Valuta salvata con successo",
     "error_adding_currency" => "Errore nell'aggiunta della valuta",
     "failed_to_store_currency" => "Impossibile salvare la valuta nel Database",
     "currency_in_use" => "La valuta è attualmente in uso da almeno un abbonamento",
     "currency_is_main" => "Impossibile rimuovere la valuta principale",
     "failed_to_remove_currency" => "Impossibile rimuovere la valuta",
     "failed_to_store_api_key" => "Impossibile salvare la chiave API",
-    "invalid_api_key"  => "Chiave API non valida",
-    "api_key_saved"   => "Chiave API salvata",
+    "invalid_api_key" => "Chiave API non valida",
+    "api_key_saved" => "Chiave API salvata",
     "currency_removed" => "Valuta rimossa",
 
     // Household
@@ -251,14 +254,14 @@ $i18n = [
     "failed_edit_household" => "Impossibile modificare un membro del nucleo familiare",
     "failed_remove_household" => "Impossibile rimuovere un membro del nucleo familiare",
     "household_in_use" => "Il membro del nucleo familiare è attualmente in uso da almeno un abbonamento",
-    "member_saved"     => "Membro salvato",
-    "member_removed"   => "Membro rimosso",
+    "member_saved" => "Membro salvato",
+    "member_removed" => "Membro rimosso",
 
     // Notifications
     "error_saving_notifications" => "Errore nel salvataggio delle notifiche",
     "wallos_notification" => "Notifica Wallos",
     "test_notification" => "Questa è una notifica di prova",
-    "email_error"      => "Errore nell'invio dell'e-mail",
+    "email_error" => "Errore nell'invio dell'e-mail",
     "notification_sent_successfuly" => "Notifica inviata con successo",
     "notifications_settings_saved" => "Impostazioni delle notifiche salvate",
     "notification_failed" => "Invio della notifica fallito",
@@ -281,7 +284,7 @@ $i18n = [
     "user_details_saved" => "Dettagli utente salvati",
 
     // Admin Page
-    "registrations"    => "Registrazioni",
+    "registrations" => "Registrazioni",
     "enable_user_registrations" => "Abilita le registrazioni utente",
     "maximum_number_users" => "Numero massimo di utenti",
     "require_email_verification" => "Richiedi la verifica dell'e-mail",
@@ -289,16 +292,42 @@ $i18n = [
     "server_url" => "URL del server",
     "server_url_info" => "Utilizzato per la verifica dell'e-mail e il recupero della password. Deve essere un URL pubblico valido.",
     "server_url_password_reset" => "Se impostato, abilita anche la funzionalità di reimpostazione della password.",
+    "disable_login" => "Disabilita il login",
+    "disable_login_info" => "Bypassare il login. Se si gestisce il server solo su una rete locale, senza accesso esterno, è possibile disabilitare il login. In questo modo, l'utente amministratore effettuerà automaticamente il login.",
+    "disable_login_info2" => "Questa impostazione può essere attivata solo se la registrazione degli utenti è disattivata e non ci sono più account utente oltre a quello dell'amministratore.",
     "max_users_info" => "Impostare a 0 per un numero illimitato di utenti",
     "user_management" => "Gestione utenti",
     "delete_user" => "Elimina utente",
     "delete_user_info" => "L'eliminazione di un utente eliminerà anche tutte le sue iscrizioni e impostazioni.",
+    "create_user" => "Crea utente",
     "smtp_settings" => "Impostazioni SMTP",
     "smtp_usage_info" => "Verrà utilizzato per il recupero della password e altre e-mail di sistema.",
 
     // Email Verification
     "email_verified" => "L'indirizzo email è stato verificato con successo",
     "email_verification_failed" => "La verifica dell'email è fallita",
+
+    // Calendar
+    "calendar" => "Calendario",
+    "sun" => "Dom",
+    "mon" => "Lun",
+    "tue" => "Mar",
+    "wed" => "Mer",
+    "thu" => "Gio",
+    "fri" => "Ven",
+    "sat" => "Sab",
+    "month-01" => "Gennaio",
+    "month-02" => "Febbraio",
+    "month-03" => "Marzo",
+    "month-04" => "Aprile",
+    "month-05" => "Maggio",
+    "month-06" => "Giugno",
+    "month-07" => "Luglio",
+    "month-08" => "Agosto",
+    "month-09" => "Settembre",
+    "month-10" => "Ottobre",
+    "month-11" => "Novembre",
+    "month-12" => "Dicembre",
 ];
 
 ?>
