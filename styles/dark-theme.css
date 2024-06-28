@@ -17,6 +17,7 @@ header .logo .logo-image {
 
 .subscription,
 .subscription-form,
+.subscription-modal,
 .account-section,
 .avatar-select,
 .logo-search,
@@ -25,7 +26,9 @@ header .logo .logo-image {
 .sort-options,
 .statistic,
 .graph,
-.filtermenu-content {
+.filtermenu-content,
+.subscription-main .actions,
+.calendar {
     background-color: #222;
     border: 1px solid #333;
     box-shadow: 0 2px 5px rgba(120, 120, 120, 0.1);
@@ -48,9 +51,32 @@ header .logo .logo-image {
   background-color: #333333;
 }
 
-.subscription-form h3 {
+.subscription-form h3,
+.subscription-modal h3 {
     color: #FFF;
-    border-bottom: 1px solid #EEE;
+}
+
+.subscription.inactive {
+    background-color: rgba(24,24,24,0.3);
+    color: rgba(200,200,200,0.6);
+    box-shadow: 0 2px 5px rgba(50, 50, 50, 0.1);
+}
+
+.subscription-main .actions {
+    color: #E0E0E0
+}
+
+.subscription-main .actions > li {
+    border-bottom: 1px solid #555;
+    border-color: #666;
+}
+
+.subscription-main .actions > li:hover {
+    background-color: #333;
+}
+
+.subscription-main .actions > li:last-of-type {
+    border: none;
 }
 
 .close-form {
@@ -88,10 +114,14 @@ select:disabled {
     cursor: not-allowed;
 }
 
+button.secondary-button,
+button.button.secondary-button,
 input[type="button"].secondary-button {
     background-color: #222;
 }
 
+button.button.secondary-button:hover,
+button.secondary-button:hover,
 input[type="button"].secondary-button:hover {
     background-color: #111;
 }
@@ -165,4 +195,12 @@ textarea {
 
 .payments-list .payments-payment .delete-payment-method {
     color: #FFF;
-  }
+}
+
+.calendar .calendar-body .calendar-cell .calendar-cell-header {
+    background-color: #111;
+}
+
+.calendar .calendar-body .calendar-cell {
+    border-right: 1px solid #111;
+}

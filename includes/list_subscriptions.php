@@ -6,16 +6,12 @@
         switch ($cycle) {
         case 1:
             return $frequency == 1 ? translate('Daily', $i18n) : $frequency . " " . translate('days', $i18n);
-            break;
         case 2:
             return $frequency == 1 ? translate('Weekly', $i18n) : $frequency . " " . translate('weeks', $i18n);
-            break;
         case 3:
             return $frequency == 1 ? translate('Monthly', $i18n) : $frequency . " " . translate('months', $i18n);
-            break;
         case 4:
             return $frequency == 1 ? translate('Yearly', $i18n) : $frequency . " " . translate('years', $i18n);
-            break;  
         }
     }
 
@@ -24,19 +20,15 @@
         case 1:
             $numberOfPaymentsPerMonth = (30 / $frequency); 
             return $price * $numberOfPaymentsPerMonth;
-            break;
         case 2:
             $numberOfPaymentsPerMonth = (4.35 / $frequency);
             return $price * $numberOfPaymentsPerMonth;
-            break;
         case 3:
             $numberOfPaymentsPerMonth = (1 / $frequency);
             return $price * $numberOfPaymentsPerMonth;
-            break;
         case 4:
             $numberOfMonths = (12 * $frequency);
             return $price / $numberOfMonths;
-            break;  
         }
     }
 
@@ -108,11 +100,23 @@
                     <img src="<?= $subscription['payment_method_icon'] ?>" title="<?= translate('payment_method', $i18n) ?>: <?= $subscription['payment_method_name'] ?>"/>
                     <?= CurrencyFormatter::format($subscription['price'], $subscription['currency_code']) ?>
                     </span>
-                    <span class="actions">
-                    <button class="image-button medium" onClick="openEditSubscription(event, <?= $subscription['id'] ?>)" name="edit">
-                        <img src="images/siteicons/<?= $colorTheme ?>/edit.png" title="<?= translate('edit_subscription', $i18n) ?>">
+                    <button type="button" class="actions-expand" onClick="expandActions(event, <?= $subscription['id'] ?>)">
+                        <i class="fas fa-ellipsis-v"></i>
                     </button>
-                    </span>
+                    <ul class="actions">
+                        <li class="edit" title="<?= translate('edit_subscription', $i18n) ?>" onClick="openEditSubscription(event, <?= $subscription['id'] ?>)">
+                            <img src="images/siteicons/<?= $colorTheme ?>/edit.png" title="<?= translate('edit_subscription', $i18n) ?>">
+                            <?= translate('edit_subscription', $i18n) ?>
+                        </li>
+                        <li class="delete" title="<?= translate('delete', $i18n) ?>" onClick="deleteSubscription(event, <?= $subscription['id'] ?>)">
+                            <img src="images/siteicons/<?= $colorTheme ?>/delete.png" title="<?= translate('edit_subscription', $i18n) ?>">
+                            <?= translate('delete', $i18n) ?>
+                        </li>
+                        <li class="clone" title="<?= translate('clone', $i18n) ?>" onClick="cloneSubscription(event, <?= $subscription['id'] ?>)">
+                            <img src="images/siteicons/<?= $colorTheme ?>/clone.png" title="<?= translate('edit_subscription', $i18n) ?>">
+                            <?= translate('clone', $i18n) ?>
+                        </li>
+                    </ul>
                 </div>
                 <div class="subscription-secondary">
                     <span class="name"><img src="images/siteicons/<?= $colorTheme ?>/subscription.png" alt="<?= translate('subscription', $i18n) ?>" /><?= $subscription['name'] ?></span>

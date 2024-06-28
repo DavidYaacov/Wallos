@@ -1,5 +1,134 @@
 # Changelog
 
+## [2.10.0](https://github.com/ellite/Wallos/compare/v2.9.0...v2.10.0) (2024-06-27)
+
+
+### Features
+
+* add purple theme ([4d74c04](https://github.com/ellite/Wallos/commit/4d74c04f0e5bab5e1ece7a4a666f14d4a221fba6))
+
+
+### Bug Fixes
+
+* file name on ics export for subscriptions with non-ascii characters ([4d74c04](https://github.com/ellite/Wallos/commit/4d74c04f0e5bab5e1ece7a4a666f14d4a221fba6))
+
+## [2.9.0](https://github.com/ellite/Wallos/compare/v2.8.0...v2.9.0) (2024-06-26)
+
+
+### Features
+
+* create users from the admin page ([#409](https://github.com/ellite/Wallos/issues/409)) ([6d2ffa6](https://github.com/ellite/Wallos/commit/6d2ffa6312b05f308117f2686681e2fcfaf734ec))
+
+## [2.8.0](https://github.com/ellite/Wallos/compare/v2.7.0...v2.8.0) (2024-06-26)
+
+
+### Features
+
+* also show previous payments on the calendar for the current month ([c2e85d6](https://github.com/ellite/Wallos/commit/c2e85d6e109d9d07cc2fdbcb09b51564d1f73341))
+* support automatic dark mode ([c2e85d6](https://github.com/ellite/Wallos/commit/c2e85d6e109d9d07cc2fdbcb09b51564d1f73341))
+
+
+### Bug Fixes
+
+* not every payment cycle was shown on the calendar ([c2e85d6](https://github.com/ellite/Wallos/commit/c2e85d6e109d9d07cc2fdbcb09b51564d1f73341))
+
+## [2.7.0](https://github.com/ellite/Wallos/compare/v2.6.1...v2.7.0) (2024-06-25)
+
+
+### Features
+
+* export subscription as ics from the calendar view ([#404](https://github.com/ellite/Wallos/issues/404)) ([f1360f7](https://github.com/ellite/Wallos/commit/f1360f7d468ef5ae7e974ec1f9bb77831ea322bb))
+
+## [2.6.1](https://github.com/ellite/Wallos/compare/v2.6.0...v2.6.1) (2024-06-25)
+
+
+### Bug Fixes
+
+* load php calendar extension ([#402](https://github.com/ellite/Wallos/issues/402)) ([c02ac77](https://github.com/ellite/Wallos/commit/c02ac770d7ac9fad1baec526b5d7dd71deaba59b))
+
+## [2.6.0](https://github.com/ellite/Wallos/compare/v2.5.2...v2.6.0) (2024-06-25)
+
+
+### Features
+
+* add calendar view ([#399](https://github.com/ellite/Wallos/issues/399)) ([369f1a2](https://github.com/ellite/Wallos/commit/369f1a2bdcd9bdf3996b3dc8de8921f8954a069d))
+
+## [2.5.2](https://github.com/ellite/Wallos/compare/v2.5.1...v2.5.2) (2024-06-24)
+
+
+### Bug Fixes
+
+* add ability to run container as an arbitrary user ([#396](https://github.com/ellite/Wallos/issues/396)) ([86fe2f3](https://github.com/ellite/Wallos/commit/86fe2f3ebb9c38ac34eaccd144a9550b7b314138))
+
+## [2.5.1](https://github.com/ellite/Wallos/compare/v2.5.0...v2.5.1) (2024-06-21)
+
+
+### Bug Fixes
+
+* ntfy notifications ([#394](https://github.com/ellite/Wallos/issues/394)) ([17722c3](https://github.com/ellite/Wallos/commit/17722c31e31eec035d8896566e9eb5596951d022))
+
+## [2.5.0](https://github.com/ellite/Wallos/compare/v2.4.2...v2.5.0) (2024-06-21)
+
+
+### Features
+
+* add option to clone subscription ([8304ed7](https://github.com/ellite/Wallos/commit/8304ed7b54f50ed7fa5ab520ff4d8d54f3ef34df))
+* edit and delete options now available directly on the subscription list ([8304ed7](https://github.com/ellite/Wallos/commit/8304ed7b54f50ed7fa5ab520ff4d8d54f3ef34df))
+
+
+### Bug Fixes
+
+* typo on webhook payload ([8304ed7](https://github.com/ellite/Wallos/commit/8304ed7b54f50ed7fa5ab520ff4d8d54f3ef34df))
+
+## [2.4.2](https://github.com/ellite/Wallos/compare/v2.4.1...v2.4.2) (2024-06-10)
+
+
+### Bug Fixes
+
+* update exchange cron only working for one user ([#384](https://github.com/ellite/Wallos/issues/384)) ([815eea7](https://github.com/ellite/Wallos/commit/815eea7e7be37e068e6173c229eb285ed8b7c30d))
+
+## [2.4.1](https://github.com/ellite/Wallos/compare/v2.4.0...v2.4.1) (2024-06-09)
+
+
+### Bug Fixes
+
+* cronjob exchange update would not work with apilayer ([#381](https://github.com/ellite/Wallos/issues/381)) ([b0b4b7a](https://github.com/ellite/Wallos/commit/b0b4b7a65cd479e7532e72e826d3c01aead403c3))
+
+## [2.4.0](https://github.com/ellite/Wallos/compare/v2.3.0...v2.4.0) (2024-06-07)
+
+
+### Features
+
+* add hability to disable login ([#378](https://github.com/ellite/Wallos/issues/378)) ([092be22](https://github.com/ellite/Wallos/commit/092be22183359f714fc9638d9013b742da828ed6))
+
+## [2.3.0](https://github.com/ellite/Wallos/compare/v2.2.0...v2.3.0) (2024-06-05)
+
+
+### Features
+
+* add ntfy as notification method ([#377](https://github.com/ellite/Wallos/issues/377)) ([65edf09](https://github.com/ellite/Wallos/commit/65edf0963b73deff0f0f7f04427e69ce335bd776))
+
+
+### Bug Fixes
+
+* custom headers for webhook notifications ([#375](https://github.com/ellite/Wallos/issues/375)) ([7217088](https://github.com/ellite/Wallos/commit/7217088bb0732735a65322bce136d7d556b1acf3))
+
+## [2.2.0](https://github.com/ellite/Wallos/compare/v2.1.0...v2.2.0) (2024-06-04)
+
+
+### Features
+
+* change filename of backup file ([fa99a73](https://github.com/ellite/Wallos/commit/fa99a735cd23918bab95baaf13b7a3142946d4b2))
+* frequency is now up to 366 ([fa99a73](https://github.com/ellite/Wallos/commit/fa99a735cd23918bab95baaf13b7a3142946d4b2))
+
+
+### Bug Fixes
+
+* add webp support to gd on the container ([fa99a73](https://github.com/ellite/Wallos/commit/fa99a735cd23918bab95baaf13b7a3142946d4b2))
+* translate: "no category" ([fa99a73](https://github.com/ellite/Wallos/commit/fa99a735cd23918bab95baaf13b7a3142946d4b2))
+* trim fixer api key ([fa99a73](https://github.com/ellite/Wallos/commit/fa99a735cd23918bab95baaf13b7a3142946d4b2))
+* update slovanian translations ([fa99a73](https://github.com/ellite/Wallos/commit/fa99a735cd23918bab95baaf13b7a3142946d4b2))
+
 ## [2.1.0](https://github.com/ellite/Wallos/compare/v2.0.0...v2.1.0) (2024-05-27)
 
 

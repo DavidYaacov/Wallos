@@ -236,8 +236,8 @@ function addCategoryButton(categoryId) {
   fetch(url)
   .then(response => {
     if (!response.ok) {
-      throw new Error(translate('network_response_error'));
       showErrorMessage(translate('failed_add_category'));
+      throw new Error(translate('network_response_error'));
     }
     return response.json();
   })
@@ -360,7 +360,7 @@ function editCategory(categoryId) {
 
 function addCurrencyButton(currencyId) {
   document.getElementById("addCurrency").disabled = true;
-  const url = 'endpoints/currency/currency.php?action=add';
+  const url = 'endpoints/currency/add.php';
   fetch(url)
   .then(response => {
     if (!response.ok) {
@@ -442,7 +442,7 @@ function addCurrencyButton(currencyId) {
 }
 
 function removeCurrency(currencyId) {
-  let url = `endpoints/currency/currency.php?action=delete&currencyId=${currencyId}`;
+  let url = `endpoints/currency/remove.php?currencyId=${currencyId}`;
   fetch(url)
   .then(response => {
     if (!response.ok) {
@@ -477,7 +477,7 @@ function editCurrency(currencyId) {
     var currencyName = encodeURIComponent(inputNameElement.value);
     var currencySymbol = encodeURIComponent(inputSymbolElement.value);
     var currencyCode = encodeURIComponent(inputCodeElement.value);
-    var url = `endpoints/currency/currency.php?action=edit&currencyId=${currencyId}&name=${currencyName}&symbol=${currencySymbol}&code=${currencyCode}`;
+    var url = `endpoints/currency/edit.php?currencyId=${currencyId}&name=${currencyName}&symbol=${currencySymbol}&code=${currencyCode}`;
 
     fetch(url)
       .then(response => {
@@ -903,6 +903,65 @@ function switchTheme() {
   });
 }
 
+function setDarkTheme(theme) {
+  const darkThemeRadio = document.querySelector("#theme-dark");
+  const lightThemeRadio = document.querySelector("#theme-light");
+  const automaticThemeRadio = document.querySelector("#theme-automatic");
+  const darkThemeCss = document.querySelector("#dark-theme");
+  const themes = {0: 'light', 1: 'dark', 2: 'automatic'};
+  const themeValue = themes[theme];
+  const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  darkThemeRadio.disabled = true;
+  lightThemeRadio.disabled = true;
+  automaticThemeRadio.disabled = true;
+  
+  fetch('endpoints/settings/theme.php', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({theme: theme})
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.success) {
+          darkThemeRadio.disabled = false;
+          lightThemeRadio.disabled = false;
+          automaticThemeRadio.disabled = false;
+
+          document.cookie = `theme=${themeValue}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
+
+          if (theme == 0) {
+            darkThemeCss.disabled = true;
+            document.body.className = 'light';
+          }
+
+          if (theme == 1)  {
+            darkThemeCss.disabled = false;
+            document.body.className = 'dark';
+          }
+
+          if (theme == 2) {
+            darkThemeCss.disabled = !prefersDarkMode;
+            document.body.className = prefersDarkMode ? 'dark' : 'light';
+            document.cookie = `inUseTheme=${prefersDarkMode ? 'dark' : 'light'}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
+          }
+
+          showSuccessMessage(data.message);
+      } else {
+          showErrorMessage(data.errorMessage);
+          darkThemeRadio.disabled = false;
+          lightThemeRadio.disabled = false;
+          automaticThemeRadio.disabled = false;
+      }
+  }).catch(error => {
+      darkThemeRadio.disabled = false;
+      lightThemeRadio.disabled = false;
+      automaticThemeRadio.disabled = false;
+  });
+}
+
 function storeSettingsOnDB(endpoint, value) {
   fetch('endpoints/settings/' + endpoint + '.php', {
     method: 'POST',
@@ -990,7 +1049,7 @@ var sortable = Sortable.create(el, {
 
 function setTheme(themeColor) {
   var currentTheme = 'blue';
-  var themeIds = ['red-theme', 'green-theme', 'yellow-theme'];
+  var themeIds = ['red-theme', 'green-theme', 'yellow-theme', 'purple-theme'];
 
   themeIds.forEach(function(id) {
     var themeStylesheet = document.getElementById(id);

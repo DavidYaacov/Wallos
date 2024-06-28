@@ -101,7 +101,14 @@ function backupDB() {
         const link = document.createElement('a');
         const filename = data.file;
         link.href = '.tmp/' + filename;
-        link.download = 'backup.zip';
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const timestamp = `${year}${month}${day}-${hours}${minutes}`;
+        link.download = `Wallos-Backup-${timestamp}.zip`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -158,12 +165,14 @@ function saveAccountRegistrationsButton () {
   const max_users = document.getElementById('maxUsers').value;
   const require_email_validation = document.getElementById('requireEmail').checked ? 1 : 0;
   const server_url = document.getElementById('serverUrl').value;
+  const disable_login = document.getElementById('disableLogin').checked ? 1 : 0;
 
   const data = {
     open_registrations: open_registrations,
     max_users: max_users,
     require_email_validation: require_email_validation,
-    server_url: server_url
+    server_url: server_url,
+    disable_login: disable_login
   };
 
   fetch('endpoints/admin/saveopenregistrations.php', {
@@ -215,4 +224,42 @@ function removeUser(userId) {
   })
   .catch(error => showErrorMessage('Error:', error));
 
+}
+
+function addUserButton() {
+  const button = document.getElementById('addUserButton');
+  button.disabled = true;
+
+  const username = document.getElementById('newUsername').value;
+  const email = document.getElementById('newEmail').value;
+  const password = document.getElementById('newPassword').value;
+
+  const data = {
+    username: username,
+    email: email,
+    password: password
+  };
+
+  fetch('endpoints/admin/adduser.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      showSuccessMessage(data.message);
+      button.disabled = false;
+      window.location.reload();
+    } else {
+      showErrorMessage(data.message);
+      button.disabled = false;
+    }
+  })
+  .catch(error => {
+    showErrorMessage(error);
+    button.disabled = false;
+  });
 }
