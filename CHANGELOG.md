@@ -1,5 +1,48 @@
 # Changelog
 
+## [2.13.0](https://github.com/ellite/Wallos/compare/v2.12.0...v2.13.0) (2024-07-04)
+
+
+### Features
+
+* uniformize layout and styles (+ checkboxes and radios) ([#423](https://github.com/ellite/Wallos/issues/423)) ([c166c7e](https://github.com/ellite/Wallos/commit/c166c7e84c06ceba5ab21341c8d56bd1aaf042ec))
+
+## [2.12.0](https://github.com/ellite/Wallos/compare/v2.11.2...v2.12.0) (2024-07-03)
+
+
+### Features
+
+* ability to add custom css styles ([50bd104](https://github.com/ellite/Wallos/commit/50bd104b5b990605f457b540bec95eff5034473d))
+* cache logos for offline use ([50bd104](https://github.com/ellite/Wallos/commit/50bd104b5b990605f457b540bec95eff5034473d))
+* more uniform and aligned styles on the settings page ([50bd104](https://github.com/ellite/Wallos/commit/50bd104b5b990605f457b540bec95eff5034473d))
+* rework styles of theme section on settings page ([50bd104](https://github.com/ellite/Wallos/commit/50bd104b5b990605f457b540bec95eff5034473d))
+
+
+### Bug Fixes
+
+* don't allow saving main and accent colors if they're the same ([50bd104](https://github.com/ellite/Wallos/commit/50bd104b5b990605f457b540bec95eff5034473d))
+
+## [2.11.2](https://github.com/ellite/Wallos/compare/v2.11.1...v2.11.2) (2024-07-02)
+
+
+### Bug Fixes
+
+* menus checkmark position ([#419](https://github.com/ellite/Wallos/issues/419)) ([4da5d47](https://github.com/ellite/Wallos/commit/4da5d47e3ce8b8564921c07e7b785a367d378d6b))
+
+## [2.11.1](https://github.com/ellite/Wallos/compare/v2.11.0...v2.11.1) (2024-06-30)
+
+
+### Bug Fixes
+
+* syntax error on svg logo ([#417](https://github.com/ellite/Wallos/issues/417)) ([b82f750](https://github.com/ellite/Wallos/commit/b82f750c8e844012a8a12e33f01719f42199e7ce))
+
+## [2.11.0](https://github.com/ellite/Wallos/compare/v2.10.0...v2.11.0) (2024-06-30)
+
+
+### Features
+
+* theming engine custom colors now affect icons as well ([83e2066](https://github.com/ellite/Wallos/commit/83e2066e7bee99a152cc3c22f5b1dd9c9866c9fd))
+
 ## [2.10.0](https://github.com/ellite/Wallos/compare/v2.9.0...v2.10.0) (2024-06-27)
 
 
