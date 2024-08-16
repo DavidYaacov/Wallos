@@ -153,13 +153,13 @@ function resizeAndUploadAvatar($uploadedFile, $uploadDir, $name)
             $newHeight = $height;
 
             if ($width > $targetWidth) {
-                $newWidth = $targetWidth;
-                $newHeight = ($targetWidth / $width) * $height;
+                $newWidth = (int)$targetWidth;
+                $newHeight = (int)(($targetWidth / $width) * $height);
             }
 
             if ($newHeight > $targetHeight) {
-                $newWidth = ($targetHeight / $newHeight) * $newWidth;
-                $newHeight = $targetHeight;
+                $newWidth = (int)(($targetHeight / $newHeight) * $newWidth);
+                $newHeight = (int)$targetHeight;
             }
 
             $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
@@ -291,7 +291,11 @@ if (
         $oldLanguage = isset($_COOKIE['language']) ? $_COOKIE['language'] : "en";
         $root = str_replace('/endpoints/user', '', dirname($_SERVER['PHP_SELF']));
         $root = $root == '' ? '/' : $root;
-        setcookie('language', $language, $cookieExpire, $root);
+        setcookie('language', $language, [
+            'path' => $root,
+            'expires' => $cookieExpire,
+            'samesite' => 'Strict'
+        ]);
         $_SESSION['avatar'] = $avatar;
         $_SESSION['main_currency'] = $main_currency;
 

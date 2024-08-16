@@ -11,7 +11,10 @@ if ($settings) {
     $themeMapping = array(0 => 'light', 1 => 'dark', 2 => 'automatic');
     $themeKey = isset($settings['dark_theme']) ? $settings['dark_theme'] : 2;
     $themeValue = $themeMapping[$themeKey];
-    setcookie('theme', $themeValue, $cookieExpire);
+    setcookie('theme', $themeValue, [
+        'expires' => $cookieExpire,
+        'samesite' => 'Strict'
+    ]);
     $settings['update_theme_setttings'] = false;
     if (isset($_COOKIE['inUseTheme']) && $settings['dark_theme'] == 2) {
         $inUseTheme = $_COOKIE['inUseTheme'];
@@ -27,6 +30,7 @@ if ($settings) {
     $settings['convertCurrency'] = $settings['convert_currency'] ? 'true': 'false';
     $settings['removeBackground'] = $settings['remove_background'] ? 'true': 'false';
     $settings['hideDisabledSubscriptions'] = $settings['hide_disabled'] ? 'true': 'false';
+    $settings['disabledToBottom'] = $settings['disabled_to_bottom'] ? 'true': 'false';
 }
 
 $query = "SELECT * FROM custom_colors WHERE user_id = :userId";
@@ -54,6 +58,8 @@ $adminSettings = $result->fetchArray(SQLITE3_ASSOC);
 
 if ($adminSettings) {
     $settings['disableLogin'] = $adminSettings['login_disabled'];
+    $settings['update_notification'] = $adminSettings['update_notification'];
+    $settings['latest_version'] = $adminSettings['latest_version'];
 }
 
 ?>

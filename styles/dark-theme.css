@@ -229,3 +229,11 @@ input[type="radio"]:disabled + label::before {
     border-color: #222;
     cursor: not-allowed;
 }
+
+input {
+    color-scheme: dark;
+}
+
+.update-banner {
+    color: #FFF;
+}

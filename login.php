@@ -51,16 +51,25 @@ if ($adminRow['login_disabled'] == 1) {
         $_SESSION['main_currency'] = $main_currency;
         $_SESSION['userId'] = $userId;
         $cookieExpire = time() + (30 * 24 * 60 * 60);
-        setcookie('language', $language, $cookieExpire);
+        setcookie('language', $language, [
+            'expires' => $cookieExpire,
+            'samesite' => 'Strict'
+        ]);
 
         $query = "SELECT color_theme FROM settings";
         $stmt = $db->prepare($query);
         $result = $stmt->execute();
         $settings = $result->fetchArray(SQLITE3_ASSOC);
-        setcookie('colorTheme', $settings['color_theme'], $cookieExpire);
+        setcookie('colorTheme', $settings['color_theme'], [
+            'expires' => $cookieExpire,
+            'samesite' => 'Strict'
+        ]);
 
         $cookieValue = $username . "|" . "abc123ABC" . "|" . $main_currency;
-        setcookie('wallos_login', $cookieValue, $cookieExpire);
+        setcookie('wallos_login', $cookieValue, [
+            'expires' => $cookieExpire,
+            'samesite' => 'Strict'
+        ]);
 
         $db->close();
         header("Location: .");
@@ -118,14 +127,20 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 $_SESSION['main_currency'] = $main_currency;
                 $_SESSION['userId'] = $userId;
                 $cookieExpire = time() + (30 * 24 * 60 * 60);
-                setcookie('language', $language, $cookieExpire);
+                setcookie('language', $language, [
+                    'expires' => $cookieExpire,
+                    'samesite' => 'Strict'
+                ]);
 
                 if ($rememberMe) {
                     $query = "SELECT color_theme FROM settings";
                     $stmt = $db->prepare($query);
                     $result = $stmt->execute();
                     $settings = $result->fetchArray(SQLITE3_ASSOC);
-                    setcookie('colorTheme', $settings['color_theme'], $cookieExpire);
+                    setcookie('colorTheme', $settings['color_theme'], [
+                        'expires' => $cookieExpire,
+                        'samesite' => 'Strict'
+                    ]);
 
                     $token = bin2hex(random_bytes(32));
                     $addLoginTokens = "INSERT INTO login_tokens (user_id, token) VALUES (:userId, :token)";
@@ -135,7 +150,10 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                     $addLoginTokensStmt->execute();
                     $_SESSION['token'] = $token;
                     $cookieValue = $username . "|" . $token . "|" . $main_currency;
-                    setcookie('wallos_login', $cookieValue, $cookieExpire);
+                    setcookie('wallos_login', $cookieValue, [
+                        'expires' => $cookieExpire,
+                        'samesite' => 'Strict'
+                    ]);
                 }
                 $db->close();
                 header("Location: .");
@@ -183,9 +201,12 @@ if ($adminRow['smtp_address'] != "" && $adminRow['server_url'] != "") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="<?= $theme == "light" ? "#FFFFFF" : "#222222" ?>" id="theme-color" />
+    <meta name="apple-mobile-web-app-title" content="Wallos">
     <title>Wallos - Subscription Tracker</title>
     <link rel="icon" type="image/png" href="images/icon/favicon.ico" sizes="16x16">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/icon/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="images/icon/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/icon/apple-touch-icon-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icon/apple-touch-icon-180.png">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="styles/theme.css?<?= $version ?>">
     <link rel="stylesheet" href="styles/login.css?<?= $version ?>">

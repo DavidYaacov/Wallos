@@ -24,63 +24,70 @@ require_once 'includes/header.php';
                                 </span>
                             </div>
 
-                            <input type="hidden" name="avatar" value="<?= $userData['avatar'] ?>" id="avatarUser"/>
-                            <div class="avatar-select" id="avatarSelect">
-                                <div class="avatar-list">
-                                    <?php foreach (scandir('images/avatars') as $index => $image) :?>
-                                        <?php if (! str_starts_with($image, '.')) :?>
-                                            <img src="images/avatars/<?=$image?>" alt="<?=$image?>" class="avatar-option" data-src="images/avatars/<?=$image?>"/>
-                                        <?php endif ?>
-                                    <?php endforeach ?>
-                                    <?php foreach (scandir('images/uploads/logos/avatars') as $index => $image) :?>
-                                        <?php if (! str_starts_with($image, '.')) :?>
-                                            <div class="avatar-container" data-src="<?=$image?>">
-                                                <img src="images/uploads/logos/avatars/<?=$image?>" alt="<?=$image?>" class="avatar-option" data-src="images/uploads/logos/avatars/<?=$image?>"/>
-                                                <div class="remove-avatar" onclick="deleteAvatar('<?=$image?>')" title="<?= translate('delete_avatar', $i18n) ?>">
-                                                    <i class="fa-solid fa-xmark"></i>
-                                                </div>
+                        <input type="hidden" name="avatar" value="<?= $userData['avatar'] ?>" id="avatarUser" />
+                        <div class="avatar-select" id="avatarSelect">
+                            <div class="avatar-list">
+                                <?php foreach (scandir('images/avatars') as $index => $image): ?>
+                                    <?php if (!str_starts_with($image, '.')): ?>
+                                        <img src="images/avatars/<?= $image ?>" alt="<?= $image ?>" class="avatar-option"
+                                            data-src="images/avatars/<?= $image ?>">
+                                    <?php endif ?>
+                                <?php endforeach ?>
+                                <?php foreach (scandir('images/uploads/logos/avatars') as $index => $image): ?>
+                                    <?php if (!str_starts_with($image, '.')): ?>
+                                        <div class="avatar-container" data-src="<?= $image ?>">
+                                            <img src="images/uploads/logos/avatars/<?= $image ?>" alt="<?= $image ?>"
+                                                class="avatar-option" data-src="images/uploads/logos/avatars/<?= $image ?>">
+                                            <div class="remove-avatar" onclick="deleteAvatar('<?= $image ?>')"
+                                                title="Delete avatar">
+                                                <i class="fa-solid fa-xmark"></i>
                                             </div>
-                                        <?php endif ?>
-                                    <?php endforeach ?>
-                                    <label for="profile_pic" class="add-avatar" title="<?= translate('upload_avatar', $i18n) ?>">
-                                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                                    </label>
-                                </div>
-                                <input type="file" id="profile_pic"class="hidden-input" name="profile_pic" accept="image/jpeg, image/png, image/gif, image/webp" onChange="successfulUpload(this, '<?= translate('file_type_error', $i18n) ?>')" />
+                                        </div>
+                                    <?php endif ?>
+                                <?php endforeach ?>
+                                <label for="profile_pic" class="add-avatar"
+                                    title="<?= translate('upload_avatar', $i18n) ?>">
+                                    <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                                </label>
                             </div>
+                            <input type="file" id="profile_pic" class="hidden-input" name="profile_pic"
+                                accept="image/jpeg, image/png, image/gif, image/webp"
+                                onChange="successfulUpload(this, '<?= addslashes(translate('file_type_error', $i18n)) ?>')" />
                         </div>
-                        <div class="grow">
-                            <div class="form-group">
-                                <label for="username"><?= translate('username', $i18n) ?>:</label>
-                                <input type="text" id="username" name="username" value="<?= $userData['username'] ?>" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label for="email"><?= translate('email', $i18n) ?>:</label>
-                                <input type="email" id="email" name="email" value="<?= $userData['email'] ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password"><?= translate('password', $i18n) ?>:</label>
-                                <input type="password" id="password" name="password">
-                            </div>
-                            <div class="form-group">
-                                <label for="confirm_password"><?= translate('confirm_password', $i18n) ?>:</label>
-                                <input type="password" id="confirm_password" name="confirm_password">
-                            </div>
-                            <?php
-                                $currencies = array();
-                                $query = "SELECT * FROM currencies WHERE user_id = :userId";
-                                $query = $db->prepare($query);
-                                $query->bindValue(':userId', $userId, SQLITE3_INTEGER);
-                                $result = $query->execute();
-                                while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-                                    $currencyId = $row['id'];
-                                    $currencies[$currencyId] = $row;
-                                }
-                                $userData['currency_symbol'] = "€";
-                            ?>
-                            <div class="form-group">
-                                <label for="currency"><?= translate('main_currency', $i18n) ?>:</label>
-                                <select id="currency" name="main_currency" placeholder="Currency">
+                    </div>
+                    <div class="grow">
+                        <div class="form-group">
+                            <label for="username"><?= translate('username', $i18n) ?>:</label>
+                            <input type="text" id="username" name="username" value="<?= $userData['username'] ?>"
+                                disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><?= translate('email', $i18n) ?>:</label>
+                            <input type="email" id="email" name="email" value="<?= $userData['email'] ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password"><?= translate('password', $i18n) ?>:</label>
+                            <input type="password" id="password" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password"><?= translate('confirm_password', $i18n) ?>:</label>
+                            <input type="password" id="confirm_password" name="confirm_password">
+                        </div>
+                        <?php
+                        $currencies = array();
+                        $query = "SELECT * FROM currencies WHERE user_id = :userId";
+                        $query = $db->prepare($query);
+                        $query->bindValue(':userId', $userId, SQLITE3_INTEGER);
+                        $result = $query->execute();
+                        while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                            $currencyId = $row['id'];
+                            $currencies[$currencyId] = $row;
+                        }
+                        $userData['currency_symbol'] = "€";
+                        ?>
+                        <div class="form-group">
+                            <label for="currency"><?= translate('main_currency', $i18n) ?>:</label>
+                            <select id="currency" name="main_currency" placeholder="Currency">
                                 <?php
                                 foreach ($currencies as $currency) {
                                     $selected = "";
@@ -1096,8 +1103,8 @@ require_once 'includes/header.php';
                     <h3><?= translate('colors', $i18n) ?></h3>
                     <div class="form-group-inline wrap">
                         <div class="theme">
-                            <input type="radio" name="theme" id="theme-blue" value="blue"
-                            onClick="setTheme('blue')" <?= $settings['color_theme'] == 'blue' ? 'checked' : '' ?>>
+                            <input type="radio" name="theme" id="theme-blue" value="blue" onClick="setTheme('blue')"
+                                <?= $settings['color_theme'] == 'blue' ? 'checked' : '' ?>>
                             <label for="theme-blue"
                                 class="theme-preview blue <?= $settings['color_theme'] == 'blue' ? 'is-selected' : '' ?>">
                                 <span class="main-color"></span>
@@ -1106,8 +1113,8 @@ require_once 'includes/header.php';
                             </label>
                         </div>
                         <div class="theme">
-                            <input type="radio" name="theme" id="theme-green" value="green"
-                            onClick="setTheme('green')" <?= $settings['color_theme'] == 'green' ? 'checked' : '' ?>>
+                            <input type="radio" name="theme" id="theme-green" value="green" onClick="setTheme('green')"
+                                <?= $settings['color_theme'] == 'green' ? 'checked' : '' ?>>
                             <label for="theme-green"
                                 class="theme-preview green <?= $settings['color_theme'] == 'green' ? 'is-selected' : '' ?>">
                                 <span class="main-color"></span>
@@ -1116,8 +1123,8 @@ require_once 'includes/header.php';
                             </label>
                         </div>
                         <div class="theme">
-                            <input type="radio" name="theme" id="theme-red" value="red"
-                            onClick="setTheme('red')" <?= $settings['color_theme'] == 'red' ? 'checked' : '' ?>>
+                            <input type="radio" name="theme" id="theme-red" value="red" onClick="setTheme('red')"
+                                <?= $settings['color_theme'] == 'red' ? 'checked' : '' ?>>
                             <label for="theme-red"
                                 class="theme-preview red <?= $settings['color_theme'] == 'red' ? 'is-selected' : '' ?>">
                                 <span class="main-color"></span>
@@ -1127,7 +1134,7 @@ require_once 'includes/header.php';
                         </div>
                         <div class="theme">
                             <input type="radio" name="theme" id="theme-yellow" value="yellow"
-                            onClick="setTheme('yellow')" <?= $settings['color_theme'] == 'yellow' ? 'checked' : '' ?>>
+                                onClick="setTheme('yellow')" <?= $settings['color_theme'] == 'yellow' ? 'checked' : '' ?>>
                             <label for="theme-yellow"
                                 class="theme-preview yellow <?= $settings['color_theme'] == 'yellow' ? 'is-selected' : '' ?>">
                                 <span class="main-color"></span>
@@ -1137,7 +1144,7 @@ require_once 'includes/header.php';
                         </div>
                         <div class="theme">
                             <input type="radio" name="theme" id="theme-purple" value="purple"
-                            onClick="setTheme('purple')" <?= $settings['color_theme'] == 'purple' ? 'checked' : '' ?>>
+                                onClick="setTheme('purple')" <?= $settings['color_theme'] == 'purple' ? 'checked' : '' ?>>
                             <label for="theme-purple"
                                 class="theme-preview purple <?= $settings['color_theme'] == 'purple' ? 'is-selected' : '' ?>">
                                 <span class="main-color"></span>
@@ -1207,8 +1214,12 @@ require_once 'includes/header.php';
             <div>
                 <div class="form-group-inline">
                     <input type="checkbox" id="convertcurrency" name="convertcurrency" onChange="setConvertCurrency()"
-                        <?php if ($settings['convert_currency'])
-                            echo 'checked'; ?>>
+                        <?php
+                        if ($settings['convert_currency'])
+                            echo ' checked';
+                        if ($apiKey == "")
+                            echo ' disabled';
+                        ?>>
                     <label for="convertcurrency"><?= translate('convert_prices', $i18n) ?></label>
                 </div>
             </div>
@@ -1241,6 +1252,42 @@ require_once 'includes/header.php';
                 <i class="fa-solid fa-circle-info"></i>
                 <?= translate('experimental_info', $i18n) ?>
             </p>
+        </div>
+    </section>
+
+    <section class="account-section">
+        <header>
+            <h2><?= translate('account', $i18n) ?></h2>
+        </header>
+        <div class="account-list">
+            <div>
+                <h3><?= translate('export_subscriptions', $i18n) ?></h3>
+                <div class="form-group-inline">
+                    <input type="button" value="<?= translate('export_as_json', $i18n) ?>" onClick="exportAsJson()"
+                        class="secondary-button thin mobile-grow" id="export-json">
+                    <input type="button" value="<?= translate('export_as_csv', $i18n) ?>" onClick="exportAsCsv()"
+                        class="secondary-button thin mobile-grow" id="export-csv">
+                </div>
+            </div>
+        </div>
+        <div>
+            <?php
+            if ($userId != 1) {
+                ?>
+                <h3><?= translate('danger_zone', $i18n) ?></h3>
+                <div class="form-group-inline">
+                    <input type="button" value="<?= translate('delete_account', $i18n) ?>" onClick="deleteAccount(<?= $userId ?>)"
+                        class="warning-button thin mobile-grow" id="delete-account">
+                </div>
+                <div class="settings-notes">
+                    <p>
+                        <i class="fa-solid fa-circle-info"></i>
+                        <?= translate('delete_account_info', $i18n) ?>
+                    </p>
+                </div>
+                <?php
+            }
+            ?>
         </div>
     </section>
 

@@ -99,8 +99,8 @@ $loginDisabledAllowed = $userCount == 1 && $settings['registrations_open'] == 0;
                 </p>
             </div>
             <div class="buttons">
-                <input type="submit" class="thin mobile-grow" value="<?= translate('save', $i18n) ?>" id="saveAccountRegistrations"
-                    onClick="saveAccountRegistrationsButton()" />
+                <input type="submit" class="thin mobile-grow" value="<?= translate('save', $i18n) ?>"
+                    id="saveAccountRegistrations" onClick="saveAccountRegistrationsButton()" />
             </div>
         </div>
     </section>
@@ -120,9 +120,16 @@ $loginDisabledAllowed = $userCount == 1 && $settings['registrations_open'] == 0;
                     ?>
                     <div class="form-group-inline" data-userid="<?= $user['id'] ?>">
                         <div class="user-list-row">
-                            <div title="<?= translate('username', $i18n) ?>"><i
-                                    class="fa-solid <?= $userIcon ?>"></i><?= $user['username'] ?></div>
-                            <div title="<?= translate('email', $i18n) ?>"><i class="fa-solid fa-envelope"></i>
+                            <div title="<?= translate('username', $i18n) ?>">
+                                <div class="user-list-icon">
+                                    <i class="fa-solid <?= $userIcon ?>"></i>
+                                </div>
+                                <?= $user['username'] ?>
+                            </div>
+                            <div title="<?= translate('email', $i18n) ?>">
+                                <div class="user-list-icon">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
                                 <a href="mailto:<?= $user['email'] ?>"><?= $user['email'] ?></a>
                             </div>
                         </div>
@@ -130,13 +137,15 @@ $loginDisabledAllowed = $userCount == 1 && $settings['registrations_open'] == 0;
                             <?php
                             if ($user['id'] != 1) {
                                 ?>
-                                <button class="image-button medium" onClick="removeUser(<?= $user['id'] ?>)" title="<?= translate('delete_user', $i18n) ?>">
+                                <button class="image-button medium" onClick="removeUser(<?= $user['id'] ?>)"
+                                    title="<?= translate('delete_user', $i18n) ?>">
                                     <?php include "images/siteicons/svg/delete.php"; ?>
                                 </button>
                                 <?php
                             } else {
                                 ?>
-                                <button class="image-button medium disabled" disabled  title="<?= translate('delete_user', $i18n) ?>">
+                                <button class="image-button medium disabled" disabled
+                                    title="<?= translate('delete_user', $i18n) ?>">
                                     <?php include "images/siteicons/svg/delete.php"; ?>
                                 </button>
                                 <?php
@@ -159,7 +168,7 @@ $loginDisabledAllowed = $userCount == 1 && $settings['registrations_open'] == 0;
             <div class="form-group">
                 <input type="text" id="newUsername" placeholder="<?= translate('username', $i18n) ?>" />
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <input type="email" id="newEmail" placeholder="<?= translate('email', $i18n) ?>" />
             </div>
             <div class="form-group-inline">
@@ -186,11 +195,13 @@ $loginDisabledAllowed = $userCount == 1 && $settings['registrations_open'] == 0;
             </div>
             <div class="form-group-inline">
                 <div>
-                    <input type="radio" name="encryption" id="encryptiontls" value="tls" <?= empty($settings['encryption']) || $settings['encryption'] == "tls" ? "checked" : "" ?> />
+                    <input type="radio" name="encryption" id="encryptiontls" value="tls"
+                        <?= empty($settings['encryption']) || $settings['encryption'] == "tls" ? "checked" : "" ?> />
                     <label for="encryptiontls"><?= translate('tls', $i18n) ?></label>
                 </div>
                 <div>
-                    <input type="radio" name="encryption" id="encryptionssl" value="ssl" <?= $settings['encryption'] == "ssl" ? "checked" : "" ?> />
+                    <input type="radio" name="encryption" id="encryptionssl" value="ssl"
+                        <?= $settings['encryption'] == "ssl" ? "checked" : "" ?> />
                     <label for="encryptionssl"><?= translate('ssl', $i18n) ?></label>
                 </div>
             </div>
@@ -209,8 +220,8 @@ $loginDisabledAllowed = $userCount == 1 && $settings['registrations_open'] == 0;
             <div class="buttons">
                 <input type="button" class="secondary-button thin mobile-grow" value="<?= translate('test', $i18n) ?>"
                     id="testSmtpSettingsButton" onClick="testSmtpSettingsButton()" />
-                <input type="submit" class="thin mobile-grow" value="<?= translate('save', $i18n) ?>" id="saveSmtpSettingsButton"
-                    onClick="saveSmtpSettingsButton()" />
+                <input type="submit" class="thin mobile-grow" value="<?= translate('save', $i18n) ?>"
+                    id="saveSmtpSettingsButton" onClick="saveSmtpSettingsButton()" />
             </div>
             <div class="settings-notes">
                 <p>
@@ -224,6 +235,140 @@ $loginDisabledAllowed = $userCount == 1 && $settings['registrations_open'] == 0;
         </div>
     </section>
 
+    <?php
+    // Get latest version from admin table
+    if (!is_null($settings['latest_version'])) {
+        $latestVersion = $settings['latest_version'];
+        $hasUpdate = version_compare($version, $latestVersion) == -1;
+    } else {
+        $hasUpdate = false;
+    }
+
+    // find unused upload logos
+    
+    // Get all logos in the subscriptions table
+    $query = 'SELECT logo FROM subscriptions';
+    $stmt = $db->prepare($query);
+    $result = $stmt->execute();
+
+    $logosOnDisk = [];
+    $logosOnDB = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $logosOnDB[] = $row['logo'];
+    }
+
+    // Get all logos in the payment_methods table
+    $query = 'SELECT icon FROM payment_methods';
+    $stmt = $db->prepare($query);
+    $result = $stmt->execute();
+
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        if (!strstr($row['icon'], "images/uploads/icons/")) {
+            $logosOnDB[] = $row['icon'];
+        }
+    }
+
+    $logosOnDB = array_unique($logosOnDB);
+
+    // Get all logos in the uploads folder
+    $uploadDir = 'images/uploads/logos/';
+    $uploadFiles = scandir($uploadDir);
+
+    foreach ($uploadFiles as $file) {
+        if ($file != '.' && $file != '..' && $file != 'avatars') {
+            $logosOnDisk[] = ['logo' => $file];
+        }
+    }
+
+    // Find unused logos
+    $unusedLogos = [];
+    foreach ($logosOnDisk as $disk) {
+        $found = false;
+        foreach ($logosOnDB as $dbLogo) {
+            if ($disk['logo'] == $dbLogo) {
+                $found = true;
+                break;
+            }
+        }
+        if (!$found) {
+            $unusedLogos[] = $disk;
+        }
+    }
+
+    $logosToDelete = count($unusedLogos);
+
+    ?>
+
+    <section class="account-section">
+        <header>
+            <h2>
+                <?= translate('maintenance_tasks', $i18n) ?>
+            </h2>
+        </header>
+        <div class="maintenance-tasks">
+            <h3><?= translate('update', $i18n) ?></h3>
+            <div class="form-group">
+                <?php
+                if ($hasUpdate) {
+                    ?>
+                    <div class="updates-list">
+                        <p><?= translate('new_version_available', $i18n) ?>.</p>
+                        <p>
+                            <?= translate('current_version', $i18n) ?>:
+                            <span>
+                                <?= $version ?>
+                                <a href="https://github.com/ellite/Wallos/releases/tag/<?= $version ?>" target="_blank">
+                                    <i class="fa-solid fa-external-link"></i>
+                                </a>
+                            </span>
+                        </p>
+                        <p>
+                            <?= translate('latest_version', $i18n) ?>:
+                            <span>
+                                <?= $latestVersion ?>
+                                <a href="https://github.com/ellite/Wallos/releases/tag/<?= $latestVersion ?>"
+                                    target="_blank">
+                                    <i class="fa-solid fa-external-link"></i>
+                                </a>
+                            </span>
+                        </p>
+                    </div>
+                    <?php
+                } else {
+                    ?>
+                    <?= translate('on_current_version', $i18n) ?>
+                    <?php
+                }
+                ?>
+            </div>
+            <div class="form-group-inline">
+                <input type="checkbox" id="updateNotification" <?= $settings['update_notification'] ? 'checked' : '' ?> onchange="toggleUpdateNotification()"/>
+                <label for="updateNotification"><?= translate('show_update_notification', $i18n) ?></label>
+            </div>
+            <h3><?= translate('orphaned_logos', $i18n) ?></h3>
+            <div class="form-group-inline">
+                <input type="button" class="button thin mobile-grow" value="<?= translate('delete', $i18n) ?>"
+                    id="deleteUnusedLogos" onClick="deleteUnusedLogos()" <?= $logosToDelete == 0 ? 'disabled' : '' ?> />
+                <span class="number-of-logos bold"><?= $logosToDelete ?></span>
+                <?= translate('orphaned_logos', $i18n) ?>
+            </div>
+            <h3><?= translate('cronjobs', $i18n) ?></h3>
+            <div>
+                <div class="inline-row">
+                    <input type="button" value="Check for Updates" class="button tiny mobile-grow" onclick="executeCronJob('checkforupdates')">
+                    <input type="button" value="Send Notifications" class="button tiny mobile-grow" onclick="executeCronJob('sendnotifications')">
+                    <input type="button" value="Send Cancellation Notifications" class="button tiny mobile-grow" onclick="executeCronJob('sendcancellationnotifications')">
+                    <input type="button" value="Send Password Reset Emails" class="button tiny mobile-grow" onclick="executeCronJob('sendresetpasswordemails')">
+                    <input type="button" value="Send Verification Emails" class="button tiny mobile-grow" onclick="executeCronJob('sendverificationemails')">
+                    <input type="button" value="Update Exchange Rates" class="button tiny mobile-grow" onclick="executeCronJob('updateexchange')">
+                    <input type="button" value="Update Next Payments" class="button tiny mobile-grow" onclick="executeCronJob('updatenextpayment')">
+                </div>
+                <div class="inline-row">
+                    <textarea id="cronjobResult" class="thin" readonly></textarea>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="account-section">
         <header>

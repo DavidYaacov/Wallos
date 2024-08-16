@@ -1,5 +1,167 @@
 # Changelog
 
+## [2.22.1](https://github.com/ellite/Wallos/compare/v2.22.0...v2.22.1) (2024-08-11)
+
+
+### Bug Fixes
+
+* inline items in subscription form out of place ([#489](https://github.com/ellite/Wallos/issues/489)) ([3f33ba0](https://github.com/ellite/Wallos/commit/3f33ba0310af0c903db9bef1dd6668146219142c))
+
+## [2.22.0](https://github.com/ellite/Wallos/compare/v2.21.3...v2.22.0) (2024-08-09)
+
+
+### Features
+
+* admin can manually trigger cronjobs ([1946ac9](https://github.com/ellite/Wallos/commit/1946ac9855696892b9a0790d46623614aa9aab2c))
+
+
+### Bug Fixes
+
+* only allow the system and admin to run the cronjobs ([1946ac9](https://github.com/ellite/Wallos/commit/1946ac9855696892b9a0790d46623614aa9aab2c))
+* reduce size of the log files of the cronjobs ([1946ac9](https://github.com/ellite/Wallos/commit/1946ac9855696892b9a0790d46623614aa9aab2c))
+
+## [2.21.3](https://github.com/ellite/Wallos/compare/v2.21.2...v2.21.3) (2024-08-08)
+
+
+### Bug Fixes
+
+* broken avatar upload when using the french language ([cf0d5d3](https://github.com/ellite/Wallos/commit/cf0d5d3df30909a0de7ef84aae2601d805617f90))
+* more deprecation warnings on image uploads ([cf0d5d3](https://github.com/ellite/Wallos/commit/cf0d5d3df30909a0de7ef84aae2601d805617f90))
+
+## [2.21.2](https://github.com/ellite/Wallos/compare/v2.21.1...v2.21.2) (2024-08-07)
+
+
+### Bug Fixes
+
+* add samesite directive to cookies ([8b0325c](https://github.com/ellite/Wallos/commit/8b0325c7d3c672754de220efd52b9ba9de8a9868))
+* service worker precaching logout.php causes user to be logged out ([8b0325c](https://github.com/ellite/Wallos/commit/8b0325c7d3c672754de220efd52b9ba9de8a9868))
+* sort by price ([8b0325c](https://github.com/ellite/Wallos/commit/8b0325c7d3c672754de220efd52b9ba9de8a9868))
+
+## [2.21.1](https://github.com/ellite/Wallos/compare/v2.21.0...v2.21.1) (2024-08-06)
+
+
+### Bug Fixes
+
+* deprecation message for null value ([#479](https://github.com/ellite/Wallos/issues/479)) ([0274b1d](https://github.com/ellite/Wallos/commit/0274b1d5257f8f1c4156e2a342df6acf177ad726))
+
+## [2.21.0](https://github.com/ellite/Wallos/compare/v2.20.1...v2.21.0) (2024-08-06)
+
+
+### Features
+
+* add option to list disabled subscriptions at the bottom ([3281f0c](https://github.com/ellite/Wallos/commit/3281f0ce35fbea237e21221d3a9026ed96ad84e5))
+* notification for wallos version updates ([3281f0c](https://github.com/ellite/Wallos/commit/3281f0ce35fbea237e21221d3a9026ed96ad84e5))
+
+## [2.20.1](https://github.com/ellite/Wallos/compare/v2.20.0...v2.20.1) (2024-07-29)
+
+
+### Bug Fixes
+
+* allow usernames with capital letters ([f241ba2](https://github.com/ellite/Wallos/commit/f241ba23018ee910ab859b2ce860b4c0678d6402))
+* use 2 decimal places for price on the calendar ([f241ba2](https://github.com/ellite/Wallos/commit/f241ba23018ee910ab859b2ce860b4c0678d6402))
+* use 2 decimal places for price when exporting ical in the calendar ([f241ba2](https://github.com/ellite/Wallos/commit/f241ba23018ee910ab859b2ce860b4c0678d6402))
+
+## [2.20.0](https://github.com/ellite/Wallos/compare/v2.19.3...v2.20.0) (2024-07-19)
+
+
+### Features
+
+* export subscriptions as csv ([8f1e155](https://github.com/ellite/Wallos/commit/8f1e1554787c6e3ffaf7e73369a66794c0636713))
+* export subscriptions as json ([8f1e155](https://github.com/ellite/Wallos/commit/8f1e1554787c6e3ffaf7e73369a66794c0636713))
+* user can delete their own account ([8f1e155](https://github.com/ellite/Wallos/commit/8f1e1554787c6e3ffaf7e73369a66794c0636713))
+
+## [2.19.3](https://github.com/ellite/Wallos/compare/v2.19.2...v2.19.3) (2024-07-15)
+
+
+### Bug Fixes
+
+* delete button on subscription form ([#460](https://github.com/ellite/Wallos/issues/460)) ([8cb4355](https://github.com/ellite/Wallos/commit/8cb43553fd2d3328fe9b1f7c5986e040071844c0))
+
+## [2.19.2](https://github.com/ellite/Wallos/compare/v2.19.1...v2.19.2) (2024-07-15)
+
+
+### Bug Fixes
+
+* test ntfy without custom headers ([#456](https://github.com/ellite/Wallos/issues/456)) ([8fcfc92](https://github.com/ellite/Wallos/commit/8fcfc9264726ec1ded81ca2c51daa65ae9f4e7d8))
+
+## [2.19.1](https://github.com/ellite/Wallos/compare/v2.19.0...v2.19.1) (2024-07-14)
+
+
+### Bug Fixes
+
+* unset sortOrder var ([a1fab4d](https://github.com/ellite/Wallos/commit/a1fab4dd1067f80054a2c52710edb859dba47127))
+
+## [2.19.0](https://github.com/ellite/Wallos/compare/v2.18.0...v2.19.0) (2024-07-14)
+
+
+### Features
+
+* add alphanumeric sort order for subscriptions ([#449](https://github.com/ellite/Wallos/issues/449)) ([775e6ee](https://github.com/ellite/Wallos/commit/775e6ee39457edef420d5c36fb310a75fd47bff6))
+
+## [2.18.0](https://github.com/ellite/Wallos/compare/v2.17.0...v2.18.0) (2024-07-14)
+
+
+### Features
+
+* disable display options checkbox when fixer key is not set ([5f10525](https://github.com/ellite/Wallos/commit/5f1052584b5ece93ebdcb5bce32210e2643a9f26))
+* display error message on the statistics page when the fixer key is needed but is missing ([5f10525](https://github.com/ellite/Wallos/commit/5f1052584b5ece93ebdcb5bce32210e2643a9f26))
+
+## [2.17.0](https://github.com/ellite/Wallos/compare/v2.16.1...v2.17.0) (2024-07-11)
+
+
+### Features
+
+* add filter and sort dashboard by subscription state ([afff992](https://github.com/ellite/Wallos/commit/afff992878287fdc51229297c455d1f69216c36e))
+
+
+### Bug Fixes
+
+* use the same font for inputs ([a539058](https://github.com/ellite/Wallos/commit/a5390580259105f14154b0d7ce1eb13631c471b1))
+
+## [2.16.1](https://github.com/ellite/Wallos/compare/v2.16.0...v2.16.1) (2024-07-10)
+
+
+### Bug Fixes
+
+* error when logos folder is empty ([#439](https://github.com/ellite/Wallos/issues/439)) ([e2e5061](https://github.com/ellite/Wallos/commit/e2e5061d1506652384ceed018aa4330b8548b792))
+
+## [2.16.0](https://github.com/ellite/Wallos/compare/v2.15.0...v2.16.0) (2024-07-10)
+
+
+### Features
+
+* add calendar to pwa shortcuts ([21ebf29](https://github.com/ellite/Wallos/commit/21ebf29f11405ab24b1b0ffd16eb667de4dfc189))
+* change apple touch icon ([21ebf29](https://github.com/ellite/Wallos/commit/21ebf29f11405ab24b1b0ffd16eb667de4dfc189))
+
+## [2.15.0](https://github.com/ellite/Wallos/compare/v2.14.2...v2.15.0) (2024-07-09)
+
+
+### Features
+
+* add maintenance tasks to admin page ([9f7f47b](https://github.com/ellite/Wallos/commit/9f7f47b5d1be2697c2c612bfddb6119c63a3d517))
+* add support to upload svg logos ([9f7f47b](https://github.com/ellite/Wallos/commit/9f7f47b5d1be2697c2c612bfddb6119c63a3d517))
+
+## [2.14.2](https://github.com/ellite/Wallos/compare/v2.14.1...v2.14.2) (2024-07-08)
+
+
+### Bug Fixes
+
+* broken subscription update query ([#431](https://github.com/ellite/Wallos/issues/431)) ([b00a985](https://github.com/ellite/Wallos/commit/b00a9855453663aeb2f1f4b7f0db3aca3994b12b))
+
+## [2.14.1](https://github.com/ellite/Wallos/compare/v2.14.0...v2.14.1) (2024-07-05)
+
+
+### Bug Fixes
+
+* dashboard scrolling to top when opening a subscription ([#427](https://github.com/ellite/Wallos/issues/427)) ([cb03af8](https://github.com/ellite/Wallos/commit/cb03af8e46fb5ec5138ed7ef729f4b56a23d2b37))
+
+## [2.14.0](https://github.com/ellite/Wallos/compare/v2.13.0...v2.14.0) (2024-07-05)
+
+
+### Features
+
+* add cancelation reminders ([#425](https://github.com/ellite/Wallos/issues/425)) ([c393146](https://github.com/ellite/Wallos/commit/c393146d9e3d494943de32ecd86983335358cf88))
+
 ## [2.13.0](https://github.com/ellite/Wallos/compare/v2.12.0...v2.13.0) (2024-07-04)
 
 

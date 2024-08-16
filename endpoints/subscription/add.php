@@ -116,13 +116,13 @@ function resizeAndUploadLogo($uploadedFile, $uploadDir, $name, $settings)
             $newHeight = $height;
 
             if ($width > $targetWidth) {
-                $newWidth = $targetWidth;
-                $newHeight = ($targetWidth / $width) * $height;
+                $newWidth = (int)$targetWidth;
+                $newHeight = (int)(($targetWidth / $width) * $height);
             }
 
             if ($newHeight > $targetHeight) {
-                $newWidth = ($targetHeight / $newHeight) * $newWidth;
-                $newHeight = $targetHeight;
+                $newWidth = (int)(($targetHeight / $newHeight) * $newWidth);
+                $newHeight = (int)$targetHeight;
             }
 
             $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
@@ -172,6 +172,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         $notify = isset($_POST['notifications']) ? true : false;
         $notifyDaysBefore = $_POST['notify_days_before'];
         $inactive = isset($_POST['inactive']) ? true : false;
+        $cancellationDate = $_POST['cancellation_date'] ?? null;
 
         if ($logoUrl !== "") {
             $logo = getLogoFromUrl($logoUrl, '../../images/uploads/logos/', $name, $settings, $i18n);
@@ -188,28 +189,25 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
         if (!$isEdit) {
             $sql = "INSERT INTO subscriptions (name, logo, price, currency_id, next_payment, cycle, frequency, notes, 
-                        payment_method_id, payer_user_id, category_id, notify, inactive, url, notify_days_before, user_id) 
+                        payment_method_id, payer_user_id, category_id, notify, inactive, url, notify_days_before, user_id, cancellation_date) 
                         VALUES (:name, :logo, :price, :currencyId, :nextPayment, :cycle, :frequency, :notes, 
-                        :paymentMethodId, :payerUserId, :categoryId, :notify, :inactive, :url, :notifyDaysBefore, :userId)";
+                        :paymentMethodId, :payerUserId, :categoryId, :notify, :inactive, :url, :notifyDaysBefore, :userId, :cancellationDate)";
         } else {
             $id = $_POST['id'];
             if ($logo != "") {
                 $sql = "UPDATE subscriptions SET name = :name, logo = :logo, price = :price, currency_id = :currencyId,
                      next_payment = :nextPayment, cycle = :cycle, frequency = :frequency, notes = :notes, payment_method_id = :paymentMethodId,
                      payer_user_id = :payerUserId, category_id = :categoryId, notify = :notify, inactive = :inactive, 
-                     url = :url, notify_days_before = :notifyDaysBefore WHERE id = :id AND user_id = :userId";
+                     url = :url, notify_days_before = :notifyDaysBefore, cancellation_date = :cancellationDate WHERE id = :id AND user_id = :userId";
             } else {
-                $sql = "UPDATE subscriptions SET name = :name, price = :price, currency_id = :currencyId, next_payment = :nextPayment,
-                    cycle = :cycle, frequency = :frequency, notes = :notes, payment_method_id = :paymentMethodId, payer_user_id = :payerUserId,
-                    category_id = :categoryId, notify = :notify, inactive = :inactive, url = :url,notify_days_before = :notifyDaysBefore
-                     WHERE id = :id AND user_id = :userId";
+                $sql = "UPDATE subscriptions SET name = :name, price = :price, currency_id = :currencyId,
+                     next_payment = :nextPayment, cycle = :cycle, frequency = :frequency, notes = :notes, payment_method_id = :paymentMethodId,
+                     payer_user_id = :payerUserId, category_id = :categoryId, notify = :notify, inactive = :inactive, 
+                     url = :url, notify_days_before = :notifyDaysBefore, cancellation_date = :cancellationDate WHERE id = :id AND user_id = :userId";
             }
         }
 
         $stmt = $db->prepare($sql);
-        if ($isEdit) {
-            $stmt->bindParam(':id', $id, SQLITE3_INTEGER);
-        }
         $stmt->bindParam(':name', $name, SQLITE3_TEXT);
         if ($logo != "") {
             $stmt->bindParam(':logo', $logo, SQLITE3_TEXT);
@@ -227,6 +225,10 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         $stmt->bindParam(':inactive', $inactive, SQLITE3_INTEGER);
         $stmt->bindParam(':url', $url, SQLITE3_TEXT);
         $stmt->bindParam(':notifyDaysBefore', $notifyDaysBefore, SQLITE3_INTEGER);
+        $stmt->bindParam(':cancellationDate', $cancellationDate, SQLITE3_TEXT);
+        if ($isEdit) {
+            $stmt->bindParam(':id', $id, SQLITE3_INTEGER);
+        }
         $stmt->bindParam(':userId', $userId, SQLITE3_INTEGER);
 
         if ($stmt->execute()) {
